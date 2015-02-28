@@ -19,16 +19,18 @@ app.get('/stylesheet.css', function(req, res){
 });
 
 io.on('connection', function(socket){
-    socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
+    //user sent message
+    socket.on('chat', function(msg){
+        io.emit('chat', msg);
     });
 
+    //user disconnected
     socket.on('disconnect', function(){
         chatApp.numUsers-=1;
     });
 
     chatApp.numUsers+=1;
-    io.emit('chat message', 'A user connected!');
+    io.emit('join', chatApp.numUsers);
 });
 
 http.listen(3000, function(){

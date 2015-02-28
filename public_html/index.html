@@ -1,18 +1,18 @@
 <!doctype html>
 <html>
 <head>
-    <title>Socket-Chat</title>
+    <title>Socket Chat</title>
     <link rel="stylesheet" type="text/css" href="stylesheet.css" defer/>
 </head>
 
 <body>
+<p id="numUsers"></p>
 <ul id="messages"></ul>
-<form action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
+<form action="" id="messageform">
+    <input id="msg" autocomplete="off" /><button>Send</button>
 </form>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="chat.js"></script>
 </body>
 

@@ -3,11 +3,21 @@
  */
 
 var socket = io();
-$('form').submit(function(){
-    socket.emit('chat message', $('#m').val());
-    $('#m').val('');
-    return false;
+
+document.getElementById("messageform").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    socket.emit('chat', document.getElementById("msg").value);
+    document.getElementById("msg").value = '';
+}, false);
+
+socket.on('chat', function(msg){
+    var ul = document.getElementById("messages");
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(msg));
+    ul.appendChild(li);
 });
-socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
+
+socket.on('join', function (num) {
+    document.getElementById('numUsers').innerHTML = num+" Users";
 });
